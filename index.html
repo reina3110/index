@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>App Hub</title>
+  <link rel="stylesheet" href="css/start-screen.css" />
+  <style>
+    .hub-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .hub-btn {
+      background: transparent;
+      border: none;
+      font-size: 32px;
+      font-weight: 600;
+      color: #0078D4;
+      cursor: pointer;
+      padding: 16px 28px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,120,212,0.12);
+      transition: transform 0.2s, background-color 0.3s;
+    }
+
+    .hub-btn:hover {
+      transform: scale(1.05);
+      background-color: rgba(0,120,212,0.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="start-screen">
+    <div class="hub-container">
+      <h1 style="color:#0078D4; font-size:48px; margin-bottom:30px;">Welcome</h1>
+      <button class="hub-btn" onclick="location.href='html+script/inchToCm.html'">📏 Inch → CM Converter</button>
+      <button class="hub-btn" onclick="location.href='html+script/gradeConverter.html'">🎓 Grade Converter</button>
+      <button class="hub-btn" onclick="location.href='html+script/calculateChange.html'">💵 Thai Baht Change Calculator</button>
+      <button class="hub-btn" onclick="location.href='html+script/geolocationAPI.html'">📍 Geolocation Distance</button>
+      <button class="hub-btn" onclick="location.href='html+script/resume.html'">📝 My Resume</button>
+    </div>
+  </div>
+</body>
+</html>
