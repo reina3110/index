@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Thai Baht Change Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8, #e0e7ef);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    #app {
+      width: 100%;
+      max-width: 400px;
+	  background: #fff;
+	  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      position: relative;
+    }
+
+    .calculator-container {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+      padding: 60px 30px;
+      border: 1px solid #e3f2e1;
+      position: relative;
+    }
+
+    h2 {
+      color: #007acc;
+      font-size: 20px;
+      font-weight: 500;
+      text-align: center;
+      margin: 0 0 20px;
+    }
+
+    input {
+      width: 91%;
+      padding: 10px 14px;
+      font-size: 15px;
+      border: 1px solid #cdeacc;
+      border-radius: 6px;
+      margin-bottom: 14px;
+      transition: border-color 0.2s ease;
+    }
+
+    input:focus {
+      border-color: #0e293d;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #005f99;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    #result {
+      margin-top: 18px;
+      font-size: 15px;
+      color: #f9fcff;
+      background: #f0f8f0;
+      padding: 16px;
+      border-radius: 6px;
+      border-left: 4px solid #007acc;
+      min-height: 40px;
+    }
+
+    .note-item {
+      padding: 4px 0;
+      border-bottom: 1px dashed #c8e6c9;
+    }
+
+    .note-item:last-child {
+      border-bottom: none;
+    }
+
+    /* Back button */
+    #backButton {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: #ccc;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      user-select: none;
+      width: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <div class="calculator-container">
+      <button id="backButton" type="button">← Back</button>
+      <h2>Thai Baht Change Calculator</h2>
+      <input type="number" id="amount" placeholder="Enter amount in THB" />
+      <button id="calcBtn">Calculate Change</button>
+      <div id="result"></div>
+    </div>
+  </div>
+
+  <script>
+    const backBtn = document.getElementById('backButton');
+    const amountInput = document.getElementById('amount');
+    const calcBtn = document.getElementById('calcBtn');
+    const result = document.getElementById('result');
+
+    // Back button → go to main hub (index.html)
+    backBtn.addEventListener('click', () => {
+      window.location.href = "../index.html";
+    });
+	
+    // Calculate change
+    calcBtn.addEventListener('click', () => {
+      let amount = parseInt(amountInput.value);
+      let notes = [500, 100, 50, 20, 1];
+      let outputHTML = "";
+
+      if (isNaN(amount) || amount <= 0) {
+        outputHTML = "Please enter a valid amount.";
+      } else {
+        for (let i = 0; i < notes.length; i++) {
+          let count = Math.floor(amount / notes[i]);
+          if (count > 0) {
+            outputHTML += `<div class="note-item">${count} × ฿${notes[i]}</div>`;
+            amount %= notes[i];
+          }
+        }
+      }
+      result.innerHTML = outputHTML || "No change needed.";
+    });
+  </script>
+
+</body>
+</html>

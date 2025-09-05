@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My resume</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+	<nav style="text-align: center; margin-bottom: 20px;">
+	<button id="backButton" type="button" onclick="goBack()"> ← Back</button>
+    <a href="resume.html" style="margin-right: 20px;">Resume</a>
+    <a href="hobbies.html">Hobbies</a>
+	
+	</nav>
+  <script>
+    function goBack() {
+      if (window.history.length > 1) {
+        window.location.href = "../index.html"; // fallback
+      }
+    }
+  </script>
+  <div class="container">
+    <!-- existing content -->
+
+  </div>
+  <div class="container">
+    <!-- Left Section -->
+    <div class="left">
+      <div class="image-placeholder">
+        <img 
+			src="./image/2568-06-24 09.10.50.jpg"
+			style="border-radius: 50%; width: 120px; height: 120px; object-fit: cover;"
+			/>
+        
+      </div>
+      <div class="name">Shinn Mon Thant</div>
+      <div class="summary">
+        Experienced in building scalable, efficient applications and databases using modern programming languages such as JavaScript, Python, and Godot
+      </div>
+      <div class="skills">
+        <h2>Languages And Tools</h2>
+        <ul>
+          <li>HTML / CSS</li>
+          <li>JavaScript</li>
+          <li>GdScript</li>
+          <li>Python</li>
+		  <li>SQL</li>
+          <li>Version Control (Git/Fossil)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right Section -->
+    <div class="right">
+      <section class="section">
+        <h2>Experience</h2>
+        <div class="item">
+          <div class="meta">Location • Jan 2024 – Present</div>
+          <p></p>
+        </div>
+        <div class="item">
+          <div class="meta">Location • Jan 2021 – Dec 2023</div>
+          <p></p>
+        </div>
+      </section>
+	  
+	  <section class="section">
+        <h2>About Me</h2>
+        <div class="item">
+          <h3>FrontEnd Developer of Redline Taxes Company</h3>
+          <div class="meta">Location • Jan 2024 – Present</div>
+          <p></p>
+        </div>
+        <div class="item">
+          <h3>Chief Director of Bird's of the Same Feather Ngo</h3>
+          <div class="meta">Location • Jan 2021 – Dec 2023</div>
+          <p></p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Education</h2>
+        <div class="item">
+          <h3>Kasem Bundit University</h3>
+          <div class="meta">Graduated: 2026</div>
+          <p>Bachelor's Degree in Computer Science</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Contact</h2>
+        <p>
+          Email: myemail@gmail.com<br>
+          Phone: 09778854333<br>
+         
+        </p>
+      </section>
+    </div>
+  </div>
+  
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distance Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8, #e0e7ef);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .app {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      padding: 50px 40px;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      text-align: center;
+      position: relative;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: #007acc;
+      margin-bottom: 14px;
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 22px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #005f99;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    #output {
+      margin-top: 18px;
+      font-size: 15px;
+      color: #333;
+      background: #f9fcff;
+      padding: 16px;
+      border-radius: 6px;
+      border-left: 4px solid #007acc;
+      text-align: left;
+      min-height: 40px;
+    }
+
+    /* Back button */
+    #backButton {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: #ccc;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      user-select: none;
+      width: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app">
+    <button id="backButton" type="button">← Back</button>
+    <h2>Distance Calculator</h2>
+    <p>Calculate the distance from your current location to the target location.</p>
+    <button id="calcBtn">Get Distance</button>
+    <div id="output">Click the button to calculate.</div>
+  </div>
+
+  <script>
+    const targetLat = 13.803821615461555;
+    const targetLng = 100.73939181204591;
+
+    function haversineDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371; // Earth's radius in km
+      const toRad = angle => angle * Math.PI / 180;
+      const dLat = toRad(lat2 - lat1);
+      const dLon = toRad(lon2 - lon1);
+
+      const a = Math.sin(dLat / 2) ** 2 +
+                Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+                Math.sin(dLon / 2) ** 2;
+
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return R * c;
+    }
+
+    document.getElementById('calcBtn').addEventListener('click', () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          position => {
+            const userLat = position.coords.latitude;
+            const userLng = position.coords.longitude;
+            const distance = haversineDistance(userLat, userLng, targetLat, targetLng);
+            document.getElementById('output').innerHTML =
+              `📍 Your Location: ${userLat.toFixed(6)}, ${userLng.toFixed(6)}<br>
+               🎯 Target Location: ${targetLat}, ${targetLng}<br>
+               📏 Distance: <strong>${distance.toFixed(2)} km</strong>`;
+          },
+          error => {
+            document.getElementById('output').innerHTML =
+              "❌ Error getting location: " + error.message;
+          }
+        );
+      } else {
+        document.getElementById('output').innerHTML =
+          "❌ Geolocation is not supported by your browser.";
+      }
+    });
+
+    // Back button → return to hub
+    document.getElementById('backButton').addEventListener('click', () => {
+      window.location.href = "../index.html";
+    });
+  </script>
+
+</body>
+</html>

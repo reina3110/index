@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Grade Converter</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root{
+      --blue: #0078D4;
+      --blue-dark: #005ea2;
+      --bg: #f4f6f8;
+      --card: #ffffff;
+      --muted: #555;
+      --shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+    body {
+      margin:0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background-color: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .app {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      width: 100%;
+    }
+    .converter {
+      background-color: var(--card);
+      padding: 40px 50px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+      border: 1px solid #e0e0e0;
+      position: relative;
+    }
+    h1 { color: #333; font-size: 26px; margin-bottom: 18px; }
+    input[type="number"] {
+      padding: 12px;
+      width: 150px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    input[type="number"]:focus {
+      outline: none;
+      border-color: var(--blue);
+    }
+    button.primary {
+      padding: 12px 20px;
+      background-color: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    button.primary:hover { background-color: var(--blue-dark); }
+    .result { margin-top: 18px; font-size: 18px; color: var(--muted); }
+    .grade { font-weight: bold; color: var(--blue); font-size: 22px; }
+    .grade-chart { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; text-align: left; font-size: 15px; color: #444; }
+    .grade-chart h2 { font-size: 17px; color: #222; margin-bottom: 10px; }
+    .grade-chart ul { list-style: none; padding-left: 0; margin: 0; }
+    .grade-chart li { margin-bottom: 6px; padding-left: 10px; position: relative; }
+    .grade-chart li::before { content: "•"; color: var(--blue); position: absolute; left: 0; }
+    .validation-message { margin-top: 12px; min-height: 20px; font-size: 16px; color: red; }
+    .back-btn {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: #ccc;
+      border: none;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="app">
+    <div class="converter">
+      <button id="back" class="back-btn" type="button">← Back</button>
+      <h1>Grade Converter</h1>
+      <div>
+        <input type="number" id="score" placeholder="Enter score (0-100)" min="0" max="100" />
+        <button id="convertBtn" class="primary">Convert</button>
+      </div>
+      <div id="validationResult" class="validation-message"></div>
+      <div class="result">Your grade is <span class="grade" id="gradeOutput">__</span></div>
+      <div class="grade-chart">
+        <h2>Grade Breakdown</h2>
+        <ul>
+          <li>90–100 → <strong>A</strong></li>
+          <li>80–89 → <strong>B</strong></li>
+          <li>70–79 → <strong>C</strong></li>
+          <li>60–69 → <strong>D</strong></li>
+          <li>Below 60 → <strong>F</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const scoreInput = document.getElementById('score');
+    const gradeOutput = document.getElementById('gradeOutput');
+    const validationResult = document.getElementById('validationResult');
+    const backBtn = document.getElementById('back');
+
+    // Back button → go to hub
+    backBtn.addEventListener('click', () => {
+      window.location.href = "../index.html"; 
+    });
+
+    // Validation
+    function checkValidity() {
+      const val = scoreInput.value.trim();
+      validationResult.style.color = 'red';
+      if (val === '') { validationResult.textContent = 'Please enter your score.'; return false; }
+      const num = Number(val);
+      if (isNaN(num)) { validationResult.textContent = 'Invalid number.'; return false; }
+      if (num < 0) { validationResult.textContent = 'Score must be at least 0.'; return false; }
+      if (num > 100) { validationResult.textContent = 'Score must not exceed 100.'; return false; }
+      validationResult.textContent = 'Input OK';
+      validationResult.style.color = 'green';
+      return true;
+    }
+
+    // Convert
+    document.getElementById('convertBtn').addEventListener('click', () => {
+      if (!checkValidity()) return;
+      const score = Math.floor(Number(scoreInput.value));
+      let grade = 'F';
+      if (score >= 90) grade = 'A';
+      else if (score >= 80) grade = 'B';
+      else if (score >= 70) grade = 'C';
+      else if (score >= 60) grade = 'D';
+      gradeOutput.textContent = grade;
+    });
+  </script>
+</body>
+</html>

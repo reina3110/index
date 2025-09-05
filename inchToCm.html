@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Inch to CM Converter</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8, #e0e7ef);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-top: 60px;
+      font-weight: 600;
+      font-size: 2rem;
+      color: #333;
+    }
+
+    .card {
+      background-color: #ffffff;
+      margin-top: 60px;
+      padding: 60px 40px;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #007acc;
+      font-weight: 500;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+
+    input[type="number"] {
+      padding: 10px;
+      width: 140px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    input[type="number"]:focus {
+      border-color: #007acc;
+      outline: none;
+    }
+
+    input[type="submit"] {
+      background-color: #007acc;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #005f99;
+    }
+
+    .output {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #444;
+      text-align: center;
+      min-height: 1.5em;
+    }
+
+    /* Back button */
+    #backButton {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: #ccc;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app" class="app" style="width: 100%; max-width: 400px; position: relative;">
+    <h1></h1>
+    <div class="card">
+      <button id="backButton" type="button">← Back</button>
+      <h2>Measurement Converter</h2>
+      <form id="converterForm">
+        <input type="number" id="inch" placeholder="Enter inches" required />
+        <input type="submit" value="Convert" />
+      </form>
+      <div class="output" id="output">Equal to ___ cm</div>
+    </div>
+  </div>
+
+  <script>
+    // Grab elements
+    const backBtn = document.getElementById('backButton');
+    const form = document.getElementById('converterForm');
+    const output = document.getElementById('output');
+    const inchInput = document.getElementById('inch');
+
+    // Back button → go to hub
+    backBtn.addEventListener('click', () => {
+      window.location.href = "../index.html";
+    });
+
+    // Form submit → convert inches to cm
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const inches = parseFloat(inchInput.value);
+      if (!isNaN(inches)) {
+        const cm = (inches * 2.54).toFixed(2);
+        output.textContent = `Equal to ${cm} cm`;
+      } else {
+        output.textContent = "Please enter a valid number.";
+      }
+    });
+  </script>
+</body>
+</html>
