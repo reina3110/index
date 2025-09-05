@@ -1,0 +1,45 @@
+.start-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #f4f6f8 0%, #cfe9fb 100%);
+  z-index: 9999;
+}
+.start-btn {
+  background: transparent;
+  border: none;
+  font-size: 64px;
+  font-weight: 700;
+  color: #0078D4;
+  cursor: pointer;
+  padding: 20px 36px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,120,212,0.12);
+  animation: pop 1.6s infinite;
+}
+@keyframes pop {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.06); opacity: 0.95; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.start-sub {
+  margin-top: 12px;
+  font-size: 14px;
+  color: rgba(0,0,0,0.55);
+  text-align:center;
+}
+
+.calculateChange-btn {
+  background: transparent;
+  border: none;
+  font-size: 64px;
+  font-weight: 700;
+  color: #0078D4;
+  cursor: pointer;
+  padding: 10px 36px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,120,212,0.12);
+  animation: pop 1.6s infinite;
+}

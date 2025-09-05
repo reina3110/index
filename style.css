@@ -1,0 +1,134 @@
+:root {
+  --primary: #222;
+  --accent: #8f00cc;
+  --bg-left: #d9a5e2;
+  --bg-right: #976692;
+  --text: #1b0327;
+  --muted: #744145;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #e5e5e5;
+  color: var(--text);
+  padding: 2rem;
+}
+
+.container {
+  display: flex;
+  max-width: 1000px;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  background: #fff;
+}
+
+.left {
+  width: 35%;
+  background-color: var(--bg-left);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid #ccc;
+}
+
+.right {
+  width: 65%;
+  background-color: var(--bg-right);
+  padding: 2rem;
+}
+
+.image {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.summary {
+  text-align: center;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.skills h2 {
+  font-size: 1rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.skills ul {
+  list-style: disc;
+  padding-left: 1.2rem;
+  font-size: 0.95rem;
+}
+
+.skills ul li {
+  margin: 0.4rem 0;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.section h2 {
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.item h3 {
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.meta {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.item p {
+  font-size: 0.95rem;
+  margin-top: 0.3rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left, .right {
+    width: 100%;
+    border-right: none;
+  }
+}
+
+#backButton {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: #ccc;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+  width: auto;
+}
